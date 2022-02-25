@@ -15,5 +15,11 @@ Inspired by [`kns`](https://github.com/blendle/kns) ❤️
 
 `csh <command>` works with all comands from `gh codespace`.
 
+## Installation
+To install **csh** you can just run this command:
+```bash
+curl https://raw.githubusercontent.com/luanzeba/csh/main/bin/csh -o /usr/local/bin/csh && chmod +x $_
+```
+
 ## Disclaimer
 This is a work in progress.
