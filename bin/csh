@@ -1,0 +1,68 @@
+#!/bin/sh
+# Simple wrapper around the 'gh codespace' command
+# Keeps track of the current codespace in a dotfile in the user's home directory
+# and passes that value to the gh codespace command
+
+set -e
+
+CODESPACE_FILE="$HOME/.codespace"
+
+function select_codespace() {
+  codespace=$(gh cs list | fzf -0 -1 --tac -q "${1:-""}" --prompt "> " | cut -f1)
+  set_codespace "$codespace"
+}
+
+function set_codespace() {
+  touch $CODESPACE_FILE
+  echo "$1" > "$CODESPACE_FILE"
+  echo "Set codespace to \"$1\""
+}
+
+function get_codespace() {
+  cat $CODESPACE_FILE 2>/dev/null
+}
+
+if [ ! -x "$(which gh 2>/dev/null)" ]; then
+  echo "please install: gh (https://cli.github.com/manual/installation)" >&2
+  exit 1
+fi
+if [ ! -x "$(which fzf 2>/dev/null)" ]; then
+  echo "please install: fzf (https://github.com/junegunn/fzf)" >&2
+  exit 1
+fi
+
+if [[ $# > 0 ]]; then
+  case "$1" in
+    dev)
+      if [ -z $2 ]; then
+        echo "usage: csh dev <repo>" >&2
+        exit 1
+      fi
+      codespace=$(gh cs create -r "$2" -m "xLargePremiumLinux" --status 2>/dev/null)
+      set_codespace $codespace
+      gh cs ssh -c $codespace
+      ;;
+    delete)
+      if [ ! -s $CODESPACE_FILE ]; then
+        select_codespace
+      fi
+      gh cs delete -c $(get_codespace)
+      rm $CODESPACE_FILE
+      ;;
+    create)
+      codespace=$(gh cs $@)
+      set_codespace $codespace
+      ;;
+    list)
+      gh cs $@
+      ;;
+    *)
+      if [ ! -s $CODESPACE_FILE ]; then
+        select_codespace
+      fi
+      gh cs "$@" -c $(get_codespace)
+      ;;
+  esac
+else
+  select_codespace
+fi
