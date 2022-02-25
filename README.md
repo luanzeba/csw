@@ -16,9 +16,9 @@ Inspired by [`kns`](https://github.com/blendle/kns) ❤️
 `csw <command>` works with all comands from `gh codespace`.
 
 ## Installation
-To install **csw** you can just run this command:
+Put the **csw** file in a directory included in the `$PATH` environment variable and give the execution permission to the file.
 ```bash
-curl https://raw.githubusercontent.com/luanzeba/csw/main/bin/csw -o /usr/local/bin/csw && chmod +x $_
+curl https://raw.githubusercontent.com/luanzeba/csw/main/bin/csw -o path/to/file && chmod +x path/to/file
 ```
 
 ## Disclaimer
