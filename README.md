@@ -1,4 +1,4 @@
-# Codespace Helper
+# Codespace CLI Wrapper
 
 Wrapper around the [`gh codespace`](https://cli.github.com/manual/gh_codespace) CLI.
 
@@ -9,16 +9,16 @@ It keeps track of the current codespace and automatically appends the `-c <codes
 Inspired by [`kns`](https://github.com/blendle/kns) ❤️
 
 ## Usage
-`csh` will use `fzf` to select the working codespace.
+`csw` will use `fzf` to select the working codespace.
 
-`csh dev` will create a codespace and ssh into it.
+`csw dev` will create a codespace and ssh into it.
 
-`csh <command>` works with all comands from `gh codespace`.
+`csw <command>` works with all comands from `gh codespace`.
 
 ## Installation
-To install **csh** you can just run this command:
+To install **csw** you can just run this command:
 ```bash
-curl https://raw.githubusercontent.com/luanzeba/csh/main/bin/csh -o /usr/local/bin/csh && chmod +x $_
+curl https://raw.githubusercontent.com/luanzeba/csw/main/bin/csw -o /usr/local/bin/csw && chmod +x $_
 ```
 
 ## Disclaimer
