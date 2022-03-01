@@ -38,15 +38,6 @@ fi
 
 if [[ $# > 0 ]]; then
   case "$1" in
-    dev)
-      if [ -z $2 ]; then
-        echo "usage: csh dev <repo>" >&2
-        exit 1
-      fi
-      codespace=$(gh cs create -r "$2" -m "xLargePremiumLinux" --status 2>/dev/null)
-      set_codespace $codespace
-      gh cs ssh -c $codespace
-      ;;
     delete)
       if [ ! -s $CODESPACE_FILE ]; then
         select_codespace
