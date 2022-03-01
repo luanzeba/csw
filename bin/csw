@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # Simple wrapper around the 'gh codespace' command
 # Keeps track of the current codespace in a dotfile in the user's home directory
 # and passes that value to the gh codespace command
