@@ -22,6 +22,11 @@ function get_codespace() {
   cat $CODESPACE_FILE 2>/dev/null
 }
 
+function exec_with_echo() {
+  echo "Running '$1'"
+  exec $1
+}
+
 if [ ! -x "$(which gh 2>/dev/null)" ]; then
   echo "please install: gh (https://cli.github.com/manual/installation)" >&2
   exit 1
@@ -46,21 +51,21 @@ if [[ $# > 0 ]]; then
       if [ ! -s $CODESPACE_FILE ]; then
         select_codespace
       fi
-      gh cs delete -c $(get_codespace)
+      exec_with_echo "gh cs $@ -c $(get_codespace)"
       rm $CODESPACE_FILE
       ;;
     create)
-      codespace=$(gh cs $@)
+      exec_with_echo "gh cs $@"
       set_codespace $codespace
       ;;
     list)
-      gh cs $@
+      exec_with_echo "gh cs $@"
       ;;
     *)
       if [ ! -s $CODESPACE_FILE ]; then
         select_codespace
       fi
-      gh cs "$@" -c $(get_codespace)
+      exec_with_echo "gh cs $@ -c $(get_codespace)"
       ;;
   esac
 else
