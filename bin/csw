@@ -23,8 +23,8 @@ function get_codespace() {
 }
 
 function exec_with_echo() {
-  echo "Running '$1'"
-  exec $1
+  echo "Running '$@'"
+  exec $@
 }
 
 if [ ! -x "$(which gh 2>/dev/null)" ]; then
@@ -46,6 +46,7 @@ if [[ $# > 0 ]]; then
       rm $CODESPACE_FILE
       ;;
     create)
+      echo $@
       exec_with_echo "gh cs $@"
       set_codespace $codespace
       ;;
