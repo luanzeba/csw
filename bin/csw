@@ -47,7 +47,7 @@ if [[ $# > 0 ]]; then
       ;;
     create)
       echo $@
-      exec_with_echo "gh cs $@"
+      codespace=$(exec_with_echo "gh cs $@" | tail -n1)
       set_codespace $codespace
       ;;
     list)
