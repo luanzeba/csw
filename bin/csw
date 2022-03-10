@@ -8,7 +8,7 @@ set -e
 CODESPACE_FILE="$HOME/.codespace"
 
 function select_codespace() {
-  codespace=$(gh cs list | fzf -0 -1 --tac -q "${1:-""}" --prompt "> " | cut -f1)
+  codespace=$(gh cs list | column -t | fzf -0 -1 --tac -q "${1:-""}" --prompt "> " | tr -s ' ' | cut -d ' ' -f1)
   set_codespace "$codespace"
 }
 
