@@ -46,8 +46,7 @@ if [[ $# > 0 ]]; then
       rm $CODESPACE_FILE
       ;;
     create)
-      echo $@
-      codespace=$(exec_with_echo "gh cs $@" | tail -n1)
+      codespace=$(exec_with_echo "gh cs $@" | tee /dev/tty | tail -n1)
       set_codespace $codespace
       ;;
     list)
