@@ -53,9 +53,11 @@ if [[ $# > 0 ]]; then
       exec_with_echo "gh cs $@"
       ;;
 
-    # Stores the value provided as the working codespace
     # Used for creating automations around `csw`
-    # Not a `gh codespace` command
+    # Not `gh codespace` commands
+    get)
+      get_codespace
+      ;;
     set)
       if [ $2 ]; then
         set_codespace $2
