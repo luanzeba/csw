@@ -42,7 +42,7 @@ if [[ $# > 0 ]]; then
       if [ ! -s $CODESPACE_FILE ]; then
         select_codespace
       fi
-      exec_with_echo "gh cs $@ -c $(get_codespace)"
+      exec_with_echo "gh cs -c $(get_codespace) $@"
       rm $CODESPACE_FILE
       ;;
     create)
@@ -67,7 +67,7 @@ if [[ $# > 0 ]]; then
       if [ ! -s $CODESPACE_FILE ]; then
         select_codespace
       fi
-      exec_with_echo "gh cs $@ -c $(get_codespace)"
+      exec_with_echo "gh cs -c $(get_codespace) $@"
       ;;
   esac
 else
