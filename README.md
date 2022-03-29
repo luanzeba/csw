@@ -11,7 +11,9 @@ Inspired by [`kns`](https://github.com/blendle/kns) ❤️
 ## Usage
 `csw` let's you select the working codespace.
 
-`csw <command>` will forward the command to `gh codespace` with the codespace automatically appended. Works with [all `gh codespace` commands](https://cli.github.com/manual/gh_codespace).
+`csw <command>` will forward the command to `gh codespace` with the codespace automatically appended.
+* It will also forward any flags you include in your invocation. E.g. `csw ssh -- -I ~/.ssh/.id_rsa` will turn into `gh cs -c $current_codespace ssh -- -I ~/.ssh/.id_rsa`
+* Works with [all `gh codespace` commands](https://cli.github.com/manual/gh_codespace).
 
 When you use `csw` to create a codespace, it automatically sets it as the working codespace.
 
